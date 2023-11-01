@@ -1,44 +1,33 @@
 import React from 'react';
 import './App.css';
-import Expenseltem from './components/Expenseltem';
+import Expenses from './components/Expenses';
+import Hello from './Hello';
 
 const App = () => {
   //지출 항목 객체 배열
 
-  const expense = [
+  const expenses = [
     {
       title: '바나나',
       price: 2000,
-      date: new Date(2023, 3, 23),
+      date: new Date(2023, 3 - 1, 23),
     },
     {
       title: 'BBQ 치킨',
       price: 20000,
-      date: new Date(2023, 5, 21),
+      date: new Date(2023, 5 - 1, 21),
     },
     {
       title: '도미노피자',
       price: 35000,
-      date: new Date(2023, 7, 4),
+      date: new Date(2023, 7 - 1, 4),
     },
   ];
+
+  console.log('App 실행!');
   return (
     <>
-      <Expenseltem
-        title={expenses[0].title}
-        price={expense[0].price}
-        date={expense[0].date}
-      />
-      <Expenseltem
-        title={expenses[1].title}
-        price={expense[1].price}
-        date={expense[1].date}
-      />
-      <Expenseltem
-        title={expenses[2].title}
-        price={expense[2].price}
-        date={expense[2].date}
-      />
+      <Expenses items={expenses} />
     </>
   );
 };
