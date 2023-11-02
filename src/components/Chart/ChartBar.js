@@ -2,11 +2,21 @@ import React from 'react';
 
 import './ChartBar.css';
 
-const ChartBar = ({ label }) => {
+const ChartBar = ({ label, currentValue, maxValue }) => {
+  let barFillHeight = '0%';
+
+  if (maxValue > 0) {
+    const percentage = (currentValue / maxValue) * 100;
+    barFillHeight = percentage + '%';
+  }
+
   return (
     <div className='chart-bar'>
       <div className='chart-bar__inner'>
-        <div className='chart-bar__fill'></div>
+        <div
+          className='chart-bar__fill'
+          style={{ height: barFillHeight }}
+        ></div>
       </div>
       <div className='chart-bar__label'>{label}</div>
     </div>
@@ -14,3 +24,8 @@ const ChartBar = ({ label }) => {
 };
 
 export default ChartBar;
+
+// em : 부모의 뭐였지
+
+// rem : HTML
+// % 는 부모의 몇 퍼센트할건지 !!

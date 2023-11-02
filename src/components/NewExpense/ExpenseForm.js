@@ -20,6 +20,7 @@ const ExpenseForm = ({ onSaveExpense, onToggle }) => {
   const priceChangeHandler = (e) => {
     setUserInput({
       ...userInput,
+      // INPUT 태그에서 VALUE 가꼬오면 문자열로 옴 !
       price: e.target.value,
     });
   };
@@ -36,7 +37,7 @@ const ExpenseForm = ({ onSaveExpense, onToggle }) => {
 
     const newExpense = {
       title: userInput.title,
-      price: userInput.price,
+      price: Number(userInput.price),
       date: new Date(userInput.date),
     };
 
