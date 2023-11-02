@@ -15,12 +15,10 @@ const ExpenseForm = ({ onSaveExpense, onToggle }) => {
         title: e.target.value,
       };
     });
-
-    // ( ) 주겠다.
   };
+
   const priceChangeHandler = (e) => {
     setUserInput({
-      // userInput에 있는 객체 프로퍼티 그대로 복사해서 붙여넣겠다는거
       ...userInput,
       price: e.target.value,
     });
@@ -34,7 +32,7 @@ const ExpenseForm = ({ onSaveExpense, onToggle }) => {
   };
 
   const formSubmitHandler = (e) => {
-    e.preventDefault(); // submit차단!
+    e.preventDefault(); // submit 차단
 
     const newExpense = {
       title: userInput.title,
@@ -42,7 +40,7 @@ const ExpenseForm = ({ onSaveExpense, onToggle }) => {
       date: new Date(userInput.date),
     };
 
-    onSaveExpense(userInput);
+    onSaveExpense(newExpense);
 
     // 입력창 리셋
     setUserInput({
@@ -50,11 +48,12 @@ const ExpenseForm = ({ onSaveExpense, onToggle }) => {
       price: '',
       date: '',
     });
+
     onToggle();
   };
 
   const cancelInsertHandler = () => {
-    console.log('취소 버튼 누름!');
+    // console.log('취소 버튼 누름!');
     onToggle();
   };
 
@@ -67,7 +66,6 @@ const ExpenseForm = ({ onSaveExpense, onToggle }) => {
             type='text'
             onChange={titleChangeHandler}
             value={userInput.title}
-            //상태변수 변화 감지 하면 리렌더링해쥼
           />
         </div>
         <div className='new-expense__control'>
