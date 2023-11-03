@@ -1,7 +1,7 @@
 import React from 'react';
-//import './Button.css';
+import './Button.css';
 import styled from 'styled-components';
-
+/*
 const Button = styled.button`
   font: inherit;
   padding: 0.5rem 1.5rem;
@@ -22,11 +22,12 @@ const Button = styled.button`
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
   }
 `;
-/*
+*/
+
 const Button = ({ type, onClick, children }) => {
   return (
     <button
-      type={type}
+      type={type || 'button'} //타입 전다 안됐으면 button 으로 처리 !
       className='button'
       onClick={onClick}
     >
@@ -34,6 +35,5 @@ const Button = ({ type, onClick, children }) => {
     </button>
   );
 };
-*/
 
 export default Button;
