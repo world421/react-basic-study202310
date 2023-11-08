@@ -4,7 +4,8 @@ import UserList from './components/Users/UserList';
 import MainHeader from './components/SideEffect/MainHeader/MainHeader';
 import Home from './components/SideEffect/Home/Home';
 import Login from './components/SideEffect/Login/Login';
-import userEvent from '@testing-library/user-event';
+//컨텍스트 불러오기
+import AuthContext from './store/auth-context';
 
 const App = () => {
   //로그인 상태를 관리하는 변수
@@ -41,16 +42,21 @@ const App = () => {
   };
 
   return (
-    <>
-      <MainHeader
-        isAuthenticated={isLoggedIn}
-        onLogout={logoutHandler}
-      />
+    //AuthContext  의 공급자라는거 선언
+    // childer 들 소비할 수 있다.
+    // 제공하고 싶은거 chillder 감싸기
+    // 이 value 를 제공
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+      }}
+    >
+      <MainHeader onLogout={logoutHandler} />
       <main>
         {isLoggedIn && <Home />}
         {!isLoggedIn && <Login onLogin={loginHandler} />}
       </main>
-    </>
+    </AuthContext.Provider>
   );
 };
 
