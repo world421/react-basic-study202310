@@ -45,7 +45,7 @@ const passwordReducer = (state, action) => {
   } else if (action.type === 'INPUT_VALIDATE') {
     return {
       value: state.value,
-      isValid: action.val.trim().length > 6,
+      isValid: state.value.trim().length > 6,
     };
   }
 };
