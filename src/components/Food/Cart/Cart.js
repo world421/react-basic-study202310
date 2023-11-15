@@ -27,12 +27,12 @@ const Cart = ({ onClose }) => {
     button,
   } = styles;
 
-  const { item, totalPrice } = useContext(CartContext);
+  const { items, totalPrice } = useContext(CartContext);
   return (
     <CartModal onClose={onClose}>
       {/* 주문 내역 */}
       <ul className={cartItemStyle}>
-        {item.map((cartItem) => (
+        {items.map((cartItem) => (
           <CartItem
             key={cartItem.id}
             cart={cartItem}
@@ -41,7 +41,7 @@ const Cart = ({ onClose }) => {
       </ul>
       <div className={total}>
         <span>주문 총액</span>
-        <span>{new Intl.NumberFormat('ko_KR').format(totalPrice)}원</span>
+        <span>{new Intl.NumberFormat('ko-KR').format(totalPrice)}원</span>
       </div>
       <div className={actions}>
         <button
