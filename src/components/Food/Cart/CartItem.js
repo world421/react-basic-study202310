@@ -4,9 +4,11 @@ import styles from './CartItem.module.scss';
 import CartContext from '../../../store/cart-context';
 
 const CartItem = ({ cart }) => {
-  const { name, price, amount } = cart;
+  const { name, price, amount, id } = cart;
 
-  const { addItem } = useContext(CartContext);
+  const { addItem, removeItem } = useContext(CartContext);
+
+  console.log(cart);
   const {
     'cart-item': cartItem,
     summary,
@@ -19,6 +21,9 @@ const CartItem = ({ cart }) => {
     // + 버튼 누르면 무적권  amount 하나다
     addItem({ ...cart, amount: 1 });
   };
+  const cartremoveItemHandler = () => {
+    removeItem(id);
+  };
 
   return (
     <li className={cartItem}>
@@ -30,7 +35,7 @@ const CartItem = ({ cart }) => {
         </div>
       </div>
       <div className={actions}>
-        <button>−</button>
+        <button onClick={cartremoveItemHandler}>−</button>
         <button onClick={cartAddItemHandler}>+</button>
       </div>
     </li>

@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { startTransition, useReducer } from 'react';
 import CartContext from './cart-context';
 
 const defaultState = {
@@ -40,9 +40,29 @@ const cartReducer = (state, action) => {
       totalPrice: updatedPrice,
     }; // 이 액션에 대한 업데이트된 새로운 상태 반환.
   } else if (action.type === 'REMOVE') {
-    const removedItems = state.items.filter((item) => item.id !== action.id);
+    //기존 배열을 복사
+    const existingItems = [...state.items];
+    // 지금 제거 대상의 인덱스를 찾자
+    const index = existingItems.findIndex((item) => item.id === action.id);
+    //제거 대상 아이템을 가져옴
+    const delTargetItem = existingItems[index];
+
+    //c총액 계산
+    const updatedPrice = state.totalPrice - delTargetItem.price; //  - 제거된 장바구니 아이템의 가격 ;
+
+    // 업데이트전의 수량이 1이라면 filter로 배열에서 아예 빼버리는 것이 맞다.
+    // 근데 1보다 크다면 filter로 제거하면 안되고,
+    // 기존 배열에서 수량만 1 내린 채로 업데이트 해야함.
+    let removedItems;
+    if (delTargetItem.amount === 1) {
+      removedItems = state.items.filter((item) => item.id !== action.id);
+    } else {
+      delTargetItem.amount--;
+      removedItems = [...existingItems];
+    }
     return {
       items: removedItems,
+      totalPrice: updatedPrice,
     };
   }
 

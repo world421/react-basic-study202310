@@ -22,7 +22,7 @@ const HeaderCartButton = ({ onShow }) => {
         <CartIcon />
       </span>
       <span>My Cart</span>
-      <span className={badge}>{items.length}</span>
+      <span className={badge}>{numberOfCart}</span>
     </button>
   );
 };
