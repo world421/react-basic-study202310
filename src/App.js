@@ -5,6 +5,7 @@ import Cart from './components/Food/Cart/Cart';
 import CartProvider from './store/CartProvider';
 
 const App = () => {
+  // 장바구니 모달을 열고 닫는 상태 변수
   const [cartIsShown, setCartIsShown] = useState(false);
 
   // 모달을 열어주는 핸들러
@@ -12,9 +13,10 @@ const App = () => {
 
   // 모달을 닫아주는 핸들러
   const hideCartHandler = () => setCartIsShown(false);
+
   return (
     <CartProvider>
-      {cartIsShown && <Cart onclose={hideCartHandler} />}
+      {cartIsShown && <Cart onClose={hideCartHandler} />}
       <Header onShowCart={showCartHandler} />
       <div id='main'>
         <Meals />

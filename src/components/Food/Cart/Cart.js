@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import CartModal from '../../UI/Modal/CartModal';
 import styles from './Cart.module.scss';
-
+import CartContext from '../../../store/cart-context';
+import CartItem from './CartItem';
 const DUMMY_CART = [
   {
     id: 'c1',
@@ -17,7 +18,7 @@ const DUMMY_CART = [
   },
 ];
 
-const Cart = ({ onclose }) => {
+const Cart = ({ onClose }) => {
   const {
     'cart-items': cartItemStyle,
     total,
@@ -25,25 +26,33 @@ const Cart = ({ onclose }) => {
     'button--alt': btnAlt,
     button,
   } = styles;
+
+  const { item, totalPrice } = useContext(CartContext);
   return (
-    <CartModal onclose={onclose}>
-      {/* 주문내역 */}
+    <CartModal onClose={onClose}>
+      {/* 주문 내역 */}
       <ul className={cartItemStyle}>
-        {DUMMY_CART.map((cartItem) => (
-          <li key={cartItem.id}>{cartItem.name}</li>
+        {item.map((cartItem) => (
+          <CartItem
+            key={cartItem.id}
+            cart={cartItem}
+          />
         ))}
       </ul>
-
       <div className={total}>
         <span>주문 총액</span>
-        <span>50,000원</span>
+        <span>{new Intl.NumberFormat('ko_KR').format(totalPrice)}원</span>
       </div>
       <div className={actions}>
-        <button className={btnAlt}>닫기</button>
+        <button
+          className={btnAlt}
+          onClick={onClose}
+        >
+          닫기
+        </button>
         <button className={button}>주문</button>
       </div>
     </CartModal>
   );
 };
-
 export default Cart;
